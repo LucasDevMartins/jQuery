@@ -19,9 +19,14 @@
 				background-color: blue;
 			}
 
+			.inputFocado {
+				background-color: #ff0000;
+			}
+
 		</style>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		
 		<script>
 
 			//janela
@@ -112,6 +117,76 @@
 					console.log('Div Interna (saiu)')
 				})
 
+				//Teclado
+
+				
+				$('#teclado').keyup((e) => {
+					if(e.keyCode < 97 || e.keyCode >100) {
+						let txt = $(e.target).val()
+						txt = txt.slice(0, -1)
+
+						$(e.target).val(txt)
+					}
+				})
+					
+				/*
+				$('#teclado').keyup((e) => {
+					$('#resultadoTecla').html('Tecla liberada')
+
+					if(e.keyCode == 13) {
+						let txt = $(e.target).val()
+						$('#resultadoTecla').html(txt)
+						$(e.target).val('')
+					}
+					
+				})
+				*/
+
+				//Formulário
+				/*
+				$('#nome').focus((e) => {
+					console.log('Esse elemento HTML recebeu foco (nome)')
+					$(e.target).addClass('inputFocado')
+				})
+
+				
+				$('#email').focus((e) => {
+					console.log('Esse elemento HTML recebeu foco (email)')
+					$(e.target).addClass('inputFocado')
+				})
+
+				$('#nome').blur((e) => {
+					console.log('Esse elemento HTML perdeu foco (nome)')
+					$(e.target).removeClass('inputFocado')
+				})
+
+				$('#email').blur((e) => {
+					console.log('Esse elemento HTML perdeu foco (email)')
+					$(e.target).removeClass('inputFocado')
+				})
+					*/
+
+				$('#opcao').change((e) => {
+					console.log($(e.target).val())
+				})
+
+				$('#form').submit((e) => {
+					e.preventDefault()
+					console.log('Formulário enviado')
+				})
+
+				$('a').click(e => {
+					e.preventDefault()
+				})
+
+				// eventos multiplos para minimizar os códigos
+				$('#nome, #email').focus((e) => {
+					$(e.target).addClass('inputFocado')
+				})
+
+				$('#nome, #email').blur((e) => {
+					$(e.target).removeClass('inputFocado')
+				})
 			})
 
 
@@ -151,27 +226,29 @@
 
 			<h3>Teclado</h3>
 			<span>Nome:</span>
-			<input type="text" />
-			<span>Resultado do evento sobre o input</span>
+			<input id="teclado" type="text" />
+			<span id="resultadoTecla">Resultado do evento sobre o input</span>
 			<hr />
 
 			<h3>Formulário</h3>
-			<form>
+			<form id="form">
 				<span>Nome:</span>
-				<input type="text" />
+				<input id="nome" type="text" />
 
 				<span>E-mail:</span>
-				<input type="text" />
+				<input id="email" type="text" />
 
 				<span>Motivo do contato:</span>
-				<select>
+				<select id="opcao">
 					<option value="">-- Selecione --</option>
 					<option value="duvida">Dúvida</option>
 					<option value="sugestao">Sugestão</option>
 				</select>
 				
-				<button type="button">Enviar</button>
+				<button type="submit">Enviar</button>
 			</form>
+
+			<a href="http://www.google.com.br">Google</a>
 		</div>
 	</body>
 
